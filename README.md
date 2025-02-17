@@ -43,9 +43,9 @@ The script is fully configurable via command-line arguments, eliminating the nee
 
 ### **Example Usage**
 ```bash
-python age_prediction_inference.py \
-    --target age \
-    --manifest_path "/workspace/justine/echo_age/a4c_no_major_surgeries_in_train_val.csv" \
+python inference_script.py \
+    --target Age \
+    --manifest_path "/workspace/a4c_no_major_surgeries_in_train_val.csv" \
     --path_column "path_column" \
     --weights_path "/workspace/justine/echo_age/wandb/run-20241226_210015-ayf7wlik/weights/model_best_epoch_val_mae.pt" \
     --save_path "/workspace/justine/echo_age/inference_results.csv" \
