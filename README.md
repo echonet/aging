@@ -37,6 +37,11 @@ To perform inference, the script requires a **manifest file (CSV)** that lists t
 - Ensure that only the **included views (A4C, PLAX, SC, A2C)** are present in the manifest file by filtering appropriately.
 - The `split` column **must** be set to `test` for inference.
 - The `path_column` specifies the exact location of each video.
+- a4c: ['A4C', 'A4C_LV', 'A4C_MV', 'A4C_LA', 'A4C_RV']
+- plax: ['PLAX_Zoom_out', 'PLAX', 'PLAX_AV_MV', 'PLAX_RV_inflow', 'PLAX_zoomed_AV', 'PLAX_Proximal_Ascending_Aorta', 'PLAX_zoomed_MV', 'PLAX_RV_outflow']
+- a2c: ['A2C', 'A2C_LV']
+- sc: ['Subcostal_4C', 'Subcostal_IVC', 'Subcostal_Abdominal_Aorta']
+  
 
 ## Running Inference
 The script is fully configurable via command-line arguments, eliminating the need to modify the script directly. Below is an example command to run inference:
