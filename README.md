@@ -30,7 +30,7 @@ To perform inference, the script requires a **manifest file (CSV)** that lists t
 
 
 ### **Important Notes**
-- The model was trained on videos of size 112*112
+- The model was trained on videos with resolution (112,112)
 - The model is **not trained for Doppler**
 - Only **video echocardiograms** should be used.
 - Each **view** (e.g., A4C, PLAX, SC, A2C) has its **own specific pretrained weight file**.
