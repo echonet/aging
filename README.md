@@ -7,7 +7,6 @@ This repository contains a script for running inference on a dataset for **Age P
 - Python 3.x
 - PyTorch Lightning
 - Torchvision
-- cvair (for data handling and model wrappers)
 
 ## Manifest Structure
 To perform inference, the script requires a **manifest file (CSV)** that lists the videos. This file should include:
@@ -55,8 +54,7 @@ python inference_script.py \
     --path_column "path_column" \
     --weights_path "/workspace/justine/echo_age/wandb/run-20241226_210015-ayf7wlik/weights/model_best_epoch_val_mae.pt" \
     --save_path "/workspace/justine/echo_age/inference_results.csv" \
-    --num_workers 4 \
-    --batch_size 64 \
+    --batch_size 32 \
     --gpu_devices 1
 ```
 
@@ -66,10 +64,43 @@ python inference_script.py \
 - `--path_column`: Column name in the manifest that contains the file paths.
 - `--weights_path`: Path to the pretrained model weights (**Ensure it matches the correct view**).
 - `--save_path`: Path where the predictions will be saved.
-- `--num_workers`: Number of workers for data loading (default: 4).
-- `--batch_size`: Batch size for inference (default: 64).
+- `--batch_size`: Batch size for inference (default: 32).
 - `--gpu_devices`: Number of GPUs to use (default: 1).
 
 ## Output
 After successful inference, the predictions are saved in the specified `--save_path`. The output file will contain the predicted age for each sample in the manifest.
 
+## Ensemble Regression for Echocardiographic Age Prediction
+
+Once you have individual predictions for all views, you can ensemble them into a single age prediction per study using the provided ensemble regression script.
+
+### Workflow Overview
+
+1. **Data Loading**: Reads CSV files for each view containing study identifiers, MRN, age, and predicted ages.
+2. **Preprocessing**:
+    - Fills MRN values to a fixed length.
+    - Aggregates predictions per study.
+    - Renames columns for clarity.
+    - Merges data from all views into a single dataframe.
+3. **Model Inference**:
+    - Uses mean predictions from each view as features.
+    - Loads a pre-trained `HistGradientBoostingRegressor` ensemble model.
+    - Predicts age for each study.
+4. **Evaluation**:
+    - Computes metrics: MAE, MSE, RMSE, R², and Pearson correlation.
+    - Prints results for model assessment.
+
+### Usage
+
+Run the ensemble script from the command line:
+
+```bash
+python ensmebling.py \
+    --plax_csv "plax.csv" \
+    --a4c_csv "a4c.csv" \
+    --a2c_csv "a2c.csv" \
+    --sc_csv "sc.csv" \
+    --boosting_weights_path "boosting_weights_path.pkl"
+```
+
+Replace the file paths with your actual CSV and model file locations.
