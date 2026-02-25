@@ -305,7 +305,7 @@ def cvair_collate_fn(batch: List[dict]):
     return batch
 
 
-class CedarsDataLoader(DataLoader):
+class DataLoader(DataLoader):
     """
     A subclass of torch.utils.data.DataLoader that uses the cvair_collate_fn function to collate batches.
     For argument documentation, see torch.utils.data.DataLoader.
@@ -316,7 +316,7 @@ class CedarsDataLoader(DataLoader):
         super().__init__(*args, **kwargs, collate_fn=cvair_collate_fn)
 
 
-class CedarsDatasetKwargTypes(TypedDict, total=False):
+class DatasetKwargTypes(TypedDict, total=False):
     """A dummy class used to make IDE autocomplete and tooltips work properly."""
 
     manifest_path: Required[Path | str]
@@ -330,9 +330,9 @@ class CedarsDatasetKwargTypes(TypedDict, total=False):
     drop_na: NotRequired[bool]
 
 
-class CedarsDataset(Dataset):
+class Dataset(Dataset):
     """
-    Generic parent class for several different kinds of common datasets we use here at Cedars CVAIR.
+    Generic parent class for several different kinds of common datasets we use here at  CVAIR.
 
     Expects to be used in a scenario where you have a big folder full of input examples (videos, ecgs, 3d arrays, images, etc.)
     and a big CSV that contains metadata and labels for those examples, called a 'manifest'.
@@ -480,7 +480,7 @@ class CedarsDataset(Dataset):
         return output_dict
 
 
-class EchoDataset(CedarsDataset):
+class EchoDataset(Dataset):
     """
     Dataset for loading echocardiogram videos.
 
@@ -507,8 +507,8 @@ class EchoDataset(CedarsDataset):
         interpolate_frames: bool = False,
         resize_res: Tuple[int] = None,
         zoom: float = 0,
-        # CedarsDataset params
-        **kwargs: Unpack[CedarsDatasetKwargTypes],
+        # Dataset params
+        **kwargs: Unpack[DatasetKwargTypes],
     ):
         self.path_column = path_column
         self.view_threshold = view_threshold

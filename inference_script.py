@@ -3,7 +3,7 @@ import torch
 from pytorch_lightning import Trainer
 from torchvision.models.video import r2plus1d_18
 
-from utils import CedarsDataLoader, EchoDataset, RegressionModelWrapper
+from utils import DataLoader, EchoDataset, RegressionModelWrapper
 
 parser = argparse.ArgumentParser(description="Run age prediction inference on a dataset")
 parser.add_argument("--target", type=str, required=True, help="The column (here age) to predict")
@@ -27,7 +27,7 @@ test_ds = EchoDataset(
     augmentations=None,  # No augmentations during inference
 )
 
-test_dl = CedarsDataLoader(
+test_dl = DataLoader(
     test_ds,
     num_workers=args.num_workers,
     batch_size=args.batch_size,
