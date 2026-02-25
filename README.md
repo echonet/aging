@@ -24,8 +24,8 @@ To perform inference, the script requires a **manifest file (CSV)** that lists t
 | `split`      | **Must be set to 'test' for inference** |
 | `path_column` | File paths to echocardiographic videos/images |
 | `StudyDate`  | Date on which the Echo Study was done |
-| `DEATH_DT`   | Date on which the patient dies |
-| `Age`        | DEATH_DT - StudyDate (in years), this is the label |
+| `BirthDate`   | Date on which the patient was born |
+| `Age`        | StudyDate - BirthDate (in years), this is the label |
 
 
 ### **Important Notes**
