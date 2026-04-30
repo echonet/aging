@@ -70,6 +70,10 @@ def main(plax_csv, a4c_csv, a2c_csv, sc_csv, boosting_weights_path=None):
 
     y_pred = model.predict(X)
 
+    combined_test_df['age_preds_ensemble'] = y_pred
+
+    combined_test_df.to_csv("combined_test_predictions.csv", index=False)
+
     mse = mean_squared_error(y, y_pred)
     mae = mean_absolute_error(y, y_pred)
     rmse = np.sqrt(mse)
