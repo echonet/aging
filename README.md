@@ -7,6 +7,7 @@ This repository contains a script for running inference on a dataset for **Age P
 - Python 3.x
 - PyTorch Lightning
 - Torchvision
+- scikit-learn 1.2.0. 
 
 ## Manifest Structure
 To perform inference, the script requires a **manifest file (CSV)** that lists the videos. This file should include:
